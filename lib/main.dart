@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:todo_application/Home/home_screen.dart';
+import 'package:todo_application/ui/EditTask/EditTask.dart';
+import 'package:todo_application/ui/home/HomeScreen.dart';
+import 'package:todo_application/ui/home/database/MyDataBase.dart';
 
 void main() {
-  runApp(const MyApp());
+  initDataBase();
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyThemeData{
+  static final primaryColor = Color.fromRGBO(93, 156, 236, 1.0);
+  static final colorBlack = Color.fromRGBO(54, 54, 54, 1.0);
+  static final colorWhite = Color.fromRGBO(255, 255, 255, 1.0);
+  static final colorAccent = Color.fromRGBO(223, 236, 219, 1.0);
 
-  // This widget is the root of your application.
+}
+class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor:MyThemeData.primaryColor,
+        accentColor: MyThemeData.colorAccent,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: MyThemeData.primaryColor,
+        )
       ),
-     routes: {
-        HomeScreen.routeName:(buildContext)=>HomeScreen(),
-     },
-      initialRoute: HomeScreen.routeName,
+      routes: {
+        HomeScreen.ROUTE_NAME : (context)=>HomeScreen(),
+        EditTask.ROUTE_NAME: (context)=>EditTask()
+      },
+      initialRoute: HomeScreen.ROUTE_NAME,
     );
   }
 }
